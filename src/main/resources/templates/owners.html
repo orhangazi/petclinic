@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf Owners Test</title>
+    <link rel="stylesheet" data-th-href="@{/css/petclinic.css}">
+</head>
+<body>
+    <div style="width: 300px;">
+        <div style="background-color: lightgray; font-weight: bold;">
+            <div style="text-align: center; width: 50px; display: inline-block;" >Id</div>
+            <div style="text-align: center; width: 100px; display: inline-block;">First Name</div>
+            <div style="text-align: center; width: 100px; display: inline-block;">Last Name</div>
+        </div>
+        <th:block th:each="owner,iterStat:${owners}">
+            <div data-th-style="${iterStat.odd}?'background-color:lightblue;':'background-color:lightgreen;'">
+                <div style="text-align: center; width: 50px; display: inline-block;" data-th-text="${owner.id}"></div>
+                <div style="display: inline-block; width: 100px;" data-th-text="${owner.firstName}"></div>
+                <div style="display: inline-block; width: 100px;" data-th-text="${owner.lastName}"></div>
+            </div>
+        </th:block>
+    </div>
+</body>
+</html>
