@@ -82,8 +82,10 @@ public class PetClinicRestController {
     }
 
     @RequestMapping(method=RequestMethod.DELETE,value = "/owner/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> deleteOwner(@PathVariable Long id){
         try {
+            petClinicService.findOwner(id);
             petClinicService.deleteOwner(id);
             return ResponseEntity.ok().build();
         }

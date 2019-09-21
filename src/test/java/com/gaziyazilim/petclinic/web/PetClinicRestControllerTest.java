@@ -27,7 +27,7 @@ public class PetClinicRestControllerTest {
     @Before
     public void setUp() {
         restTemplate = new RestTemplate();
-        BasicAuthorizationInterceptor basicAuthorizationInterceptor = new BasicAuthorizationInterceptor("user","secret");
+        BasicAuthorizationInterceptor basicAuthorizationInterceptor = new BasicAuthorizationInterceptor("user2","secret2");
         restTemplate.setInterceptors(Arrays.asList(basicAuthorizationInterceptor));
     }
 
@@ -93,10 +93,10 @@ public class PetClinicRestControllerTest {
 
     @Test
     public void testDeleteOwner() {
-        restTemplate.delete("http://localhost:8080/rest/owner/1");
+        //restTemplate.delete("http://localhost:8080/rest/owner/1");
+        ResponseEntity<Void> responseEntity = restTemplate.exchange("http://localhost:8080/rest/owner/1", HttpMethod.DELETE,null,Void.class);
         try {
-            //restTemplate.getForEntity("http://localhost:8080/rest/owner/1",Owner.class);
-            ResponseEntity<Void> responseEntity = restTemplate.exchange("http://localhost:8080/rest/owner/1", HttpMethod.DELETE,null,Void.class);
+            restTemplate.getForEntity("http://localhost:8080/rest/owner/1",Owner.class);
             Assert.fail("should have not returned owner");
         }
         catch (HttpClientErrorException e){
