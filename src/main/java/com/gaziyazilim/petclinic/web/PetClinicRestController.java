@@ -5,6 +5,7 @@ import com.gaziyazilim.petclinic.exception.OwnerNotFoundException;
 import com.gaziyazilim.petclinic.model.Owner;
 import com.gaziyazilim.petclinic.service.PetClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.ConstraintViolationException;
 import java.net.URI;
 import java.util.List;
 
@@ -30,15 +32,20 @@ public class PetClinicRestController {
             URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
             return ResponseEntity.created(location).build();
         }
+        catch(ConstraintViolationException ex){
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).build();
+        }
         catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
+    @Cacheable("allOwners")
     @RequestMapping(method = RequestMethod.GET,value = "/owners")
     public ResponseEntity<List<Owner>> getOwners(){
 
         try {
+            System.out.println("getOwners called. Test for method level caching");
             List<Owner> owners = petClinicService.findOwners();
             return ResponseEntity.ok(owners);
         }

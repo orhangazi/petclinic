@@ -13,8 +13,14 @@ create unique index idx_auth_username on authorities(username, authority);
 
 create table public.t_owner(
   id bigint not null,
-  first_name varchar(255),
-  last_name varchar(255)
+  first_name varchar(255) not null,
+  last_name varchar(255) not null
+);
+
+create table public.t_vet(
+   id bigint not null,
+   first_name varchar(255) not null,
+   last_name varchar(255) not null
 );
 
 create table public.t_pet(
@@ -25,6 +31,7 @@ create table public.t_pet(
 );
 
 alter table public.t_owner add constraint public.constraint1 primary key(id);
+alter table public.t_vet add constraint public.constraint11 primary key(id);
 alter table public.t_pet add constraint public.constraint2 primary key(id);
 alter table public.t_pet add constraint public.constraint3 foreign key(owner_id) references public.t_owner(id);
 

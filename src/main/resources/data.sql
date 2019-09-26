@@ -15,6 +15,10 @@ insert into t_owner(id,first_name,last_name) values(3,'oğuzhan','kılıç');
 insert into t_owner(id,first_name,last_name) values(4,'orhan','kılıç');
 insert into t_owner(id,first_name,last_name) values(5,'meral','doğan');
 
+insert into t_vet(id,first_name,last_name) values(1,'mahmut','gezgin');
+insert into t_vet(id,first_name,last_name) values(2,'bilal','uslu');
+insert into t_vet(id,first_name,last_name) values(3,'vadet','özcan');
+
 insert into t_pet(id,first_name,birth_date,owner_id) values(1,'barut','2018-04-01',1);
 insert into t_pet(id,first_name,birth_date,owner_id) values(2,'tonny','2018-04-01',1);
 insert into t_pet(id,first_name,birth_date,owner_id) values(3,'cessy','2018-04-01',1);
